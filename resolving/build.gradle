@@ -4,6 +4,9 @@ if (project.hasProperty("topobyte")) {
 }
 
 dependencies {
+    compile project(':webgun-core');
+
+    compile 'com.slimjars.trove4j:trove4j-int-array-list:1.0.1'
 }
 
 def pomInfo = new XmlSlurper().parse(new File(projectDir, 'info.pom'));
