@@ -1,0 +1,3 @@
+include 'core', 'resolving'
+project(':core').name = 'webgun-core'
+project(':resolving').name = 'webgun-resolving'
