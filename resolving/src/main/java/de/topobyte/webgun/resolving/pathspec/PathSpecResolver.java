@@ -52,6 +52,7 @@ public class PathSpecResolver<T extends Context> implements PathResolver<T>
 			if (mapping.getSpec().matches(path, pathSpecOutput)) {
 				generator = mapping.getFactory().create(context, path,
 						pathSpecOutput, parameters);
+				break;
 			}
 		}
 
