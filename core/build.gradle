@@ -4,7 +4,7 @@ if (project.hasProperty("topobyte")) {
 }
 
 dependencies {
-    compile 'de.topobyte:pagegen-core:0.1.0'
+    compile 'de.topobyte:webpaths-core:0.0.3'
 }
 
 def pomInfo = new XmlSlurper().parse(new File(projectDir, 'info.pom'));

@@ -21,37 +21,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import de.topobyte.jsoup.ContentGeneratable;
-import de.topobyte.pagegen.core.Context;
 import de.topobyte.webgun.resolving.PathResolver;
 import de.topobyte.webpaths.WebPath;
 
-public class PathSpecResolver<T extends Context> implements PathResolver<T>
+public class PathSpecResolver<R> implements PathResolver<R>
 {
 
-	protected List<PathSpecMapping> mappings = new ArrayList<>();
+	protected List<PathSpecMapping<R>> mappings = new ArrayList<>();
 
-	protected void map(WebPath path, PathSpecFactory factory)
+	protected void map(WebPath path, PathSpecFactory<R> factory)
 	{
 		map(new PathSpec(path), factory);
 	}
 
-	protected void map(PathSpec spec, PathSpecFactory factory)
+	protected void map(PathSpec spec, PathSpecFactory<R> factory)
 	{
-		mappings.add(new PathSpecMapping(spec, factory));
+		mappings.add(new PathSpecMapping<R>(spec, factory));
 	}
 
 	@Override
-	public ContentGeneratable getGenerator(WebPath path, T context,
-			Map<String, String[]> parameters)
+	public R getGenerator(WebPath path, Map<String, String[]> parameters)
 	{
-		ContentGeneratable generator = null;
+		R generator = null;
 
 		PathSpecOutput pathSpecOutput = new PathSpecOutput();
-		for (PathSpecMapping mapping : mappings) {
+		for (PathSpecMapping<R> mapping : mappings) {
 			if (mapping.getSpec().matches(path, pathSpecOutput)) {
-				generator = mapping.getFactory().create(context, path,
-						pathSpecOutput, parameters);
+				generator = mapping.getFactory().create(path, pathSpecOutput,
+						parameters);
 				break;
 			}
 		}

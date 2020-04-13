@@ -19,14 +19,11 @@ package de.topobyte.webgun.resolving;
 
 import java.util.Map;
 
-import de.topobyte.jsoup.ContentGeneratable;
-import de.topobyte.pagegen.core.Context;
 import de.topobyte.webpaths.WebPath;
 
-public interface PathResolver<T extends Context>
+public interface PathResolver<R>
 {
 
-	ContentGeneratable getGenerator(WebPath path, T context,
-			Map<String, String[]> parameters);
+	R getGenerator(WebPath path, Map<String, String[]> parameters);
 
 }

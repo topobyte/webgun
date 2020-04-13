@@ -21,33 +21,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import de.topobyte.jsoup.ContentGeneratable;
-import de.topobyte.pagegen.core.Context;
 import de.topobyte.webpaths.WebPath;
 
-public class ListPathResolver<T extends Context> implements PathResolver<T>
+public class ListPathResolver<R> implements PathResolver<R>
 {
 
-	protected List<PathResolver<T>> resolvers;
+	protected List<PathResolver<R>> resolvers;
 
 	public ListPathResolver()
 	{
 		this.resolvers = new ArrayList<>();
 	}
 
-	public ListPathResolver(List<PathResolver<T>> resolvers)
+	public ListPathResolver(List<PathResolver<R>> resolvers)
 	{
 		this.resolvers = resolvers;
 	}
 
 	@Override
-	public ContentGeneratable getGenerator(WebPath path, T context,
-			Map<String, String[]> parameters)
+	public R getGenerator(WebPath path, Map<String, String[]> parameters)
 	{
-		ContentGeneratable generator = null;
+		R generator = null;
 
-		for (PathResolver<T> resolver : resolvers) {
-			generator = resolver.getGenerator(path, context, parameters);
+		for (PathResolver<R> resolver : resolvers) {
+			generator = resolver.getGenerator(path, parameters);
 			if (generator != null) {
 				return generator;
 			}

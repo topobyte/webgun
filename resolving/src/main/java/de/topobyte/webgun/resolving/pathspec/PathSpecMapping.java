@@ -17,13 +17,13 @@
 
 package de.topobyte.webgun.resolving.pathspec;
 
-public class PathSpecMapping
+public class PathSpecMapping<R>
 {
 
 	private PathSpec spec;
-	private PathSpecFactory factory;
+	private PathSpecFactory<R> factory;
 
-	public PathSpecMapping(PathSpec spec, PathSpecFactory factory)
+	public PathSpecMapping(PathSpec spec, PathSpecFactory<R> factory)
 	{
 		this.spec = spec;
 		this.factory = factory;
@@ -34,7 +34,7 @@ public class PathSpecMapping
 		return spec;
 	}
 
-	public PathSpecFactory getFactory()
+	public PathSpecFactory<R> getFactory()
 	{
 		return factory;
 	}

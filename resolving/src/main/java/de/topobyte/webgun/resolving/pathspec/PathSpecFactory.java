@@ -19,14 +19,12 @@ package de.topobyte.webgun.resolving.pathspec;
 
 import java.util.Map;
 
-import de.topobyte.jsoup.ContentGeneratable;
-import de.topobyte.pagegen.core.Context;
 import de.topobyte.webpaths.WebPath;
 
-public interface PathSpecFactory
+public interface PathSpecFactory<R>
 {
 
-	public ContentGeneratable create(Context context, WebPath path,
-			PathSpecOutput output, Map<String, String[]> parameters);
+	public R create(WebPath path, PathSpecOutput output,
+			Map<String, String[]> parameters);
 
 }
