@@ -19,32 +19,33 @@ package de.topobyte.webgun.resolving;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import de.topobyte.webpaths.WebPath;
 
-public class ListPathResolver<R> implements PathResolver<R>
+public class ListPathResolver<R, D> implements PathResolver<R, D>
 {
 
-	protected List<PathResolver<R>> resolvers;
+	protected List<PathResolver<R, D>> resolvers;
 
 	public ListPathResolver()
 	{
 		this.resolvers = new ArrayList<>();
 	}
 
-	public ListPathResolver(List<PathResolver<R>> resolvers)
+	public ListPathResolver(List<PathResolver<R, D>> resolvers)
 	{
 		this.resolvers = resolvers;
 	}
 
 	@Override
-	public R getGenerator(WebPath path, Map<String, String[]> parameters)
+	public R getGenerator(WebPath path, HttpServletRequest request, D data)
 	{
 		R generator = null;
 
-		for (PathResolver<R> resolver : resolvers) {
-			generator = resolver.getGenerator(path, parameters);
+		for (PathResolver<R, D> resolver : resolvers) {
+			generator = resolver.getGenerator(path, request, data);
 			if (generator != null) {
 				return generator;
 			}

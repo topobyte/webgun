@@ -17,13 +17,13 @@
 
 package de.topobyte.webgun.resolving;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 import de.topobyte.webpaths.WebPath;
 
-public interface PathResolver<R>
+public interface PathResolver<R, D>
 {
 
-	R getGenerator(WebPath path, Map<String, String[]> parameters);
+	R getGenerator(WebPath path, HttpServletRequest request, D data);
 
 }

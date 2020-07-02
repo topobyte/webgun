@@ -19,36 +19,37 @@ package de.topobyte.webgun.resolving.pathspec;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import de.topobyte.webgun.resolving.PathResolver;
 import de.topobyte.webpaths.WebPath;
 
-public class PathSpecResolver<R> implements PathResolver<R>
+public class PathSpecResolver<R, D> implements PathResolver<R, D>
 {
 
-	protected List<PathSpecMapping<R>> mappings = new ArrayList<>();
+	protected List<PathSpecMapping<R, D>> mappings = new ArrayList<>();
 
-	protected void map(WebPath path, PathSpecFactory<R> factory)
+	protected void map(WebPath path, PathSpecFactory<R, D> factory)
 	{
 		map(new PathSpec(path), factory);
 	}
 
-	protected void map(PathSpec spec, PathSpecFactory<R> factory)
+	protected void map(PathSpec spec, PathSpecFactory<R, D> factory)
 	{
-		mappings.add(new PathSpecMapping<R>(spec, factory));
+		mappings.add(new PathSpecMapping<R, D>(spec, factory));
 	}
 
 	@Override
-	public R getGenerator(WebPath path, Map<String, String[]> parameters)
+	public R getGenerator(WebPath path, HttpServletRequest request, D data)
 	{
 		R generator = null;
 
 		PathSpecOutput pathSpecOutput = new PathSpecOutput();
-		for (PathSpecMapping<R> mapping : mappings) {
+		for (PathSpecMapping<R, D> mapping : mappings) {
 			if (mapping.getSpec().matches(path, pathSpecOutput)) {
 				generator = mapping.getFactory().create(path, pathSpecOutput,
-						parameters);
+						request, data);
 				break;
 			}
 		}

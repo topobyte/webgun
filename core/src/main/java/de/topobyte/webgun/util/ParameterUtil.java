@@ -21,6 +21,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class ParameterUtil
 {
 
@@ -33,6 +35,11 @@ public class ParameterUtil
 		}
 	}
 
+	public static String get(HttpServletRequest request, String name)
+	{
+		return get(request.getParameterMap(), name);
+	}
+
 	public static String get(Map<String, String[]> parameters, String name)
 	{
 		String[] values = parameters.get(name);
@@ -40,6 +47,12 @@ public class ParameterUtil
 			return null;
 		}
 		return values[0];
+	}
+
+	public static boolean hasValue(HttpServletRequest request, String name,
+			String value)
+	{
+		return hasValue(request.getParameterMap(), name, value);
 	}
 
 	public static boolean hasValue(Map<String, String[]> parameters,

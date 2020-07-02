@@ -17,14 +17,14 @@
 
 package de.topobyte.webgun.resolving.pathspec;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 import de.topobyte.webpaths.WebPath;
 
-public interface PathSpecFactory<R>
+public interface PathSpecFactory<R, D>
 {
 
 	public R create(WebPath path, PathSpecOutput output,
-			Map<String, String[]> parameters);
+			HttpServletRequest request, D data);
 
 }
