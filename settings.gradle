@@ -1,3 +1,4 @@
-include 'core', 'resolving'
+include 'core', 'resolving', 'scheduler'
 project(':core').name = 'webgun-core'
 project(':resolving').name = 'webgun-resolving'
+project(':scheduler').name = 'webgun-scheduler'
