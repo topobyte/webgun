@@ -5,6 +5,8 @@ if (project.hasProperty("topobyte")) {
 
 dependencies {
     compile project(':webgun-core');
+
+    testRuntimeOnly 'ch.qos.logback:logback-classic:1.2.3'
 }
 
 def pomInfo = new XmlSlurper().parse(new File(projectDir, 'info.pom'));
