@@ -18,11 +18,15 @@
 package de.topobyte.webgun.resolving.pathspec;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.slimjars.dist.gnu.trove.list.TIntList;
 import com.slimjars.dist.gnu.trove.list.array.TIntArrayList;
 
+import de.topobyte.webgun.resolving.pathspec.parts.ParameterPart;
+import de.topobyte.webgun.resolving.pathspec.parts.Part;
+import de.topobyte.webgun.resolving.pathspec.parts.StaticPart;
 import de.topobyte.webpaths.WebPath;
 
 public class PathSpec
@@ -32,6 +36,7 @@ public class PathSpec
 	private TIntList positionsNormal = new TIntArrayList();
 	private TIntList positionsParameters = new TIntArrayList();
 	private List<String> names = new ArrayList<>();
+	private List<Part> parts = new ArrayList<>();
 
 	public PathSpec(String... parts)
 	{
@@ -61,14 +66,52 @@ public class PathSpec
 		}
 	}
 
+	public boolean acceptsAdditional()
+	{
+		return acceptAdditional;
+	}
+
+	public int getNumStaticParts()
+	{
+		return positionsNormal.size();
+	}
+
+	public int getNumParameters()
+	{
+		return positionsParameters.size();
+	}
+
+	public String getName(int i)
+	{
+		return names.get(i);
+	}
+
+	public List<Part> getParts()
+	{
+		return Collections.unmodifiableList(parts);
+	}
+
+	public int getStaticPosition(int i)
+	{
+		return positionsNormal.get(i);
+	}
+
+	public int getParameterPosition(int i)
+	{
+		return positionsParameters.get(i);
+	}
+
 	private void addParameter(int i, String part)
 	{
 		if (part.startsWith(":") && part.endsWith(":")) {
 			positionsParameters.add(i);
-			names.add(part.substring(1, part.length() - 1));
+			String name = part.substring(1, part.length() - 1);
+			names.add(name);
+			parts.add(new ParameterPart(name));
 		} else {
 			positionsNormal.add(i);
 			names.add(part);
+			parts.add(new StaticPart(part));
 		}
 	}
 
@@ -105,6 +148,26 @@ public class PathSpec
 		}
 
 		return true;
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder strb = new StringBuilder();
+		for (Part part : getParts()) {
+			strb.append("/");
+			if (part instanceof StaticPart) {
+				strb.append(part.getName());
+			} else if (part instanceof ParameterPart) {
+				strb.append(":");
+				strb.append(part.getName());
+				strb.append(":");
+			}
+		}
+		if (acceptAdditional) {
+			strb.append("[/*]");
+		}
+		return strb.toString();
 	}
 
 }
