@@ -31,7 +31,7 @@ public class PathSpec
 	private boolean acceptAdditional;
 	private TIntList positionsNormal = new TIntArrayList();
 	private TIntList positionsParameters = new TIntArrayList();
-	private List<String> names = new ArrayList<String>();
+	private List<String> names = new ArrayList<>();
 
 	public PathSpec(String... parts)
 	{

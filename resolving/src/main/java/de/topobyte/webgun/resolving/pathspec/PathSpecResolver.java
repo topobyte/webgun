@@ -37,7 +37,7 @@ public class PathSpecResolver<R, D> implements PathResolver<R, D>
 
 	protected void map(PathSpec spec, PathSpecFactory<R, D> factory)
 	{
-		mappings.add(new PathSpecMapping<R, D>(spec, factory));
+		mappings.add(new PathSpecMapping<>(spec, factory));
 	}
 
 	@Override
