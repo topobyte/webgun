@@ -42,7 +42,7 @@ public class Scheduler<T extends NamedRunnable>
 	private PriorityQueue<Entry<T>> entries = new PriorityQueue<>();
 
 	private static final DateTimeFormatter formatter = DateTimeFormatter
-			.ofPattern("YYYY-MM-dd HH:mm:ss");
+			.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	private Thread schedulerThread = null;
 	private Set<Thread> threads = new HashSet<>();
