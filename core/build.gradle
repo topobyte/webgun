@@ -4,22 +4,21 @@ if (project.hasProperty("topobyte")) {
 }
 
 dependencies {
-    compile 'de.topobyte:webpaths-core:0.0.4'
-    compile 'javax.servlet:javax.servlet-api:3.1.0'
-    compile 'org.slf4j:slf4j-api:1.7.30'
+    api 'de.topobyte:webpaths-core:0.0.4'
+    api 'javax.servlet:javax.servlet-api:3.1.0'
+    api 'org.slf4j:slf4j-api:1.7.30'
 }
 
 def pomInfo = new XmlSlurper().parse(new File(projectDir, 'info.pom'));
 
-afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                pom.project {
-                    name pomInfo.name
-                    description pomInfo.description
-                    url pomInfo.url
-                }
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            pom {
+                name = "$pomInfo.name"
+                description = "$pomInfo.description"
+                url = "$pomInfo.url"
             }
         }
     }
