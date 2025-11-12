@@ -20,10 +20,9 @@ package de.topobyte.webgun.resolving.pathspec;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import de.topobyte.webgun.resolving.PathResolver;
 import de.topobyte.webpaths.WebPath;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class PathSpecResolver<R, D> implements PathResolver<R, D>
 {

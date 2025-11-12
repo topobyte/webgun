@@ -17,8 +17,6 @@
 
 package de.topobyte.webgun.resolving.smart;
 
-import javax.servlet.http.HttpServletRequest;
-
 import de.topobyte.webgun.resolving.pathspec.PathSpecFactory;
 import de.topobyte.webgun.resolving.pathspec.PathSpecOutput;
 import de.topobyte.webgun.resolving.pathspec.PathSpecResolver;
@@ -32,6 +30,7 @@ import de.topobyte.webgun.resolving.smart.factories.PathSpecFactory2;
 import de.topobyte.webgun.resolving.smart.factories.PathSpecFactory3;
 import de.topobyte.webgun.resolving.smart.factories.PathSpecFactory4;
 import de.topobyte.webpaths.WebPath;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class SmartPathSpecResolver<R, D> extends PathSpecResolver<R, D>
 {

@@ -17,9 +17,8 @@
 
 package de.topobyte.webgun.resolving.pathspec;
 
-import javax.servlet.http.HttpServletRequest;
-
 import de.topobyte.webpaths.WebPath;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface PathSpecFactory<R, D>
 {

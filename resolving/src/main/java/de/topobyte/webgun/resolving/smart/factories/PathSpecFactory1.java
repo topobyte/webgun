@@ -17,10 +17,9 @@
 
 package de.topobyte.webgun.resolving.smart.factories;
 
-import javax.servlet.http.HttpServletRequest;
-
 import de.topobyte.webgun.resolving.pathspec.PathSpecOutput;
 import de.topobyte.webpaths.WebPath;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface PathSpecFactory1<R, D, T>
 {

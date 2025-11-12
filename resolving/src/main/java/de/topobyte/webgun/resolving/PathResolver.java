@@ -17,9 +17,8 @@
 
 package de.topobyte.webgun.resolving;
 
-import javax.servlet.http.HttpServletRequest;
-
 import de.topobyte.webpaths.WebPath;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface PathResolver<R, D>
 {

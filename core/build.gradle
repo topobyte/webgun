@@ -5,7 +5,7 @@ if (project.hasProperty("topobyte")) {
 
 dependencies {
     api 'de.topobyte:webpaths-core:0.0.4'
-    api 'javax.servlet:javax.servlet-api:3.1.0'
+    api 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     api 'org.slf4j:slf4j-api:1.7.30'
 }
 
